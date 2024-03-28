@@ -4,14 +4,14 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/openjdk:11.0
-   - run:
+    steps:
+      - checkout
+      - run:
           name: "Setup custom environment variables"
           command: echo 'export MY_ENV_VAR="FOO"' >> "$BASH_ENV"
-      - run: # print the name of the branch we're on
+      - run:
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
-      # Run another step, the same as above; note that you can
-      # invoke environment variable without curly braces.
       - run:
           name: "What branch am I on now?"
           command: echo $CIRCLE_BRANCH
@@ -25,9 +25,8 @@ jobs:
           name: "Print an env var stored in a Context"
           command: echo ${CONTEXT_ENV_VAR}
 
-
-workflows: 
+workflows:
   build:
     jobs:
-      - build:
+      - build-and-test:
           context: Testing-Env-Vars
