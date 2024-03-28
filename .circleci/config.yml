@@ -6,27 +6,17 @@ jobs:
       - image: cimg/openjdk:11.0
     steps:
       - checkout
+      # Installation de Maven
       - run:
-          name: "Setup custom environment variables"
-          command: echo 'export MY_ENV_VAR="FOO"' >> "$BASH_ENV"
+          name: Install Maven
+          command: sudo apt-get install -y maven
+
+      # Exécution des tests avec Maven
       - run:
-          name: "What branch am I on?"
-          command: echo ${CIRCLE_BRANCH}
-      - run:
-          name: "What branch am I on now?"
-          command: echo $CIRCLE_BRANCH
-      - run:
-          name: "What was my custom environment variable?"
-          command: echo ${MY_ENV_VAR}
-      - run:
-          name: "Print an env var stored in the Project"
-          command: echo ${PROJECT_ENV_VAR}
-      - run:
-          name: "Print an env var stored in a Context"
-          command: echo ${CONTEXT_ENV_VAR}
+          name: Run Tests
+          command: mvn test
 
 workflows:
   build:
     jobs:
-      - build-and-test:
-          context: Testing-Env-Vars
+      - build 
