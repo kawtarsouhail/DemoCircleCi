@@ -8,6 +8,7 @@ jobs:
   scan:
     docker:
       - image: cimg/openjdk:11.0.21
+      - image: byrnedo/alpine-curl
     working_directory: /tmp/workspace
     environment:
       ENV_FILE: /tmp/workspace/.circleenv
@@ -29,8 +30,12 @@ jobs:
             export PATH="$PATH:$PWD/sonar-scanner-4.6.2.2472-linux/bin"
             sonar-scanner -X \
                 -Dsonar.projectKey=$CIRCLE_BRANCH:$CIRCLE_PROJECT_REPONAME \
-                -Dsonar.host.url=http://localhost:9000/ \
+                -Dsonar.host.url=http://194.180.191.56:9000/ \ # Remplacez par l'adresse IP de votre serveur SonarQube
                 -Dsonar.login=$SONAR_TOKEN
+      - run:
+          name: Test avec curl
+          command: |
+            curl http://127.0.0.1:9000
 
 workflows:
   version: 2
