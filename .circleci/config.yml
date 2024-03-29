@@ -30,7 +30,7 @@ jobs:
             export PATH="$PATH:$PWD/sonar-scanner-4.6.2.2472-linux/bin"
             sonar-scanner -X \
                 -Dsonar.projectKey=$CIRCLE_BRANCH:$CIRCLE_PROJECT_REPONAME \
-                -Dsonar.host.url=http://194.180.191.56:9000/ \ # Remplacez par l'adresse IP de votre serveur SonarQube
+                -Dsonar.host.url=http://194.180.191.56:9000/ \ 
                 -Dsonar.login=$SONAR_TOKEN
       - run:
           name: Test avec curl
