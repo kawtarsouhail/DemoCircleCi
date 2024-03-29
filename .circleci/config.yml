@@ -20,9 +20,9 @@ jobs:
       - run:
           name: Télécharger et installer SonarQube scanner
           command: |
-            wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.6.1.59531.zip
-            unzip sonarqube-9.6.1.59531.zip
-            rm sonarqube-9.6.1.59531.zip
+            wget -O sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+            unzip sonar-scanner.zip
+            rm sonar-scanner.zip
       - run:
           name: Run Sonarscanner
           command: |
