@@ -10,9 +10,25 @@ jobs:
       - run:
           name: Set up SonarQube
           command: |
-            curl --location --silent "https://somelinkto/download/sonar-scanner-cli.zip" -o sonar-scanner.zip
-            unzip -qq sonar-scanner.zip
-            export PATH=$PATH:$PWD/sonar-scanner/bin
+            #!/bin/bash -eo pipefail
+            
+            # Télécharge le Sonar Scanner CLI avec vérification de la réussite du téléchargement
+            curl --location --silent --fail "https://somelinkto/download/sonar-scanner-cli.zip" -o sonar-scanner.zip || {
+              echo "Erreur lors du téléchargement de Sonar Scanner CLI.";
+              exit 1;
+            }
+            
+            # Décompresse le fichier zip et vérifie si l'opération a réussi
+            unzip -qq sonar-scanner.zip || {
+              echo "Echec de la décompression de Sonar Scanner CLI.";
+              exit 1;
+            }
+            
+            # Ajoute le binaire Sonar Scanner au PATH
+            export PATH=$PATH:$PWD/sonar-scanner/bin || {
+              echo "Erreur lors de la configuration du PATH pour Sonar Scanner.";
+              exit 1;
+            }
 
       - run:
           name: Build and analyze
