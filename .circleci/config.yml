@@ -1,33 +1,57 @@
+version: 2.1
+
 jobs:
-  deploy_test:
+  build:
+    docker:
+      - image: circleci/openjdk:11.0-jdk
     steps:
+      - checkout
+      # Étapes de construction de l'application
+
+  deploy-test:
+    docker:
+      - image: circleci/openjdk:11.0-jdk
+    steps:
+      - checkout
       - run:
           name: Deploy to Test Environment
           command: |
-            # Your deployment script or command for test environment
+            # Étapes de déploiement vers l'environnement de test
+            echo "Deploying to Test Environment..."
 
-  deploy_staging:
+  deploy-staging:
+    docker:
+      - image: circleci/openjdk:11.0-jdk
     steps:
+      - checkout
       - run:
           name: Deploy to Staging Environment
           command: |
-            # Your deployment script or command for staging environment
+            # Étapes de déploiement vers l'environnement de staging
+            echo "Deploying to Staging Environment..."
 
-  deploy_production:
+  deploy-production:
+    docker:
+      - image: circleci/openjdk:11.0-jdk
     steps:
+      - checkout
       - run:
           name: Deploy to Production Environment
           command: |
-            # Your deployment script or command for production environment
+            # Étapes de déploiement vers l'environnement de production
+            echo "Deploying to Production Environment..."
 
 workflows:
   version: 2
-  main:
+  deploy:
     jobs:
-      - deploy_test
-      - deploy_staging:
+      - build
+      - deploy-test:
           requires:
-            - deploy_test
-      - deploy_production:
+            - build
+      - deploy-staging:
           requires:
-            - deploy_staging
+            - deploy-test
+      - deploy-production:
+          requires:
+            - deploy-staging
