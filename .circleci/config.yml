@@ -7,12 +7,12 @@ jobs:
     steps:
       - checkout
 
-- run:
-    name: Set up SonarQube
-    command: |
-      curl --location --silent "https://somelinkto/download/sonar-scanner-cli.zip" -o sonar-scanner.zip
-      unzip -qq sonar-scanner.zip
-      export PATH=$PATH:$PWD/sonar-scanner/bin
+      - run:
+          name: Set up SonarQube
+          command: |
+            curl --location --silent "https://somelinkto/download/sonar-scanner-cli.zip" -o sonar-scanner.zip
+            unzip -qq sonar-scanner.zip
+            export PATH=$PATH:$PWD/sonar-scanner/bin
 
       - run:
           name: Build and analyze
