@@ -13,7 +13,7 @@ jobs:
            mvn clean verify sonar:sonar \
             -Dsonar.projectKey=DemoCircleCi \
             -Dsonar.host.url=http://localhost:9000 \
-            -Dsonar.login=sqp_f44ad2e341dd6f97a4cd3670da650ae565c3c7cb
+            -Dsonar.login=sqp_d4d285d9a43c94f770d08e1a263896fc0751f46c
 
 workflows:
   version: 2
