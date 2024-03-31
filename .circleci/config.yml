@@ -10,10 +10,10 @@ jobs:
       - run:
           name: Build and SonarQube analysis
           command: |
-            mvn clean verify sonar:sonar \
-              -Dsonar.projectKey=DemoCircleCi \
-              -Dsonar.host.url=http://localhost:9000 \
-              -Dsonar.login=sqp_3b1f7225aeb10a4460643e5e0d16296e1c76e522
+           mvn clean verify sonar:sonar \
+            -Dsonar.projectKey=DemoCircleCi \
+            -Dsonar.host.url=http://localhost:9000 \
+            -Dsonar.login=sqp_f44ad2e341dd6f97a4cd3670da650ae565c3c7cb
 
 workflows:
   version: 2
