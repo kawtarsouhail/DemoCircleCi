@@ -12,7 +12,7 @@ jobs:
           command: |
            mvn clean verify sonar:sonar \
             -Dsonar.projectKey=DemoCircleCi \
-            -Dsonar.host.url=http://localhost:9000 \
+            -Dsonar.host.url=http://<SONARQUBE_IP>:9000 \
             -Dsonar.login=sqp_d4d285d9a43c94f770d08e1a263896fc0751f46c
 
 workflows:
